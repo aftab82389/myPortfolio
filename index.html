@@ -1,148 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Portfolio of Aftab Alam, a web developer specializing in JavaScript and React.js">
+    <title>Aftab Alam - Web Developer</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body{
+        
+        body {
             width: 100%;
-            height:100%;
-            background: #000;
-            color:#ddd;
+            height: 100%;
+            background: linear-gradient(135deg, #000 0%, #111 100%);
+            color: #ddd;
+            padding: 1rem;
+            font-family: Arial, sans-serif;
         }
-        .main{
-            width:100%;
-            min-height:100vh;
+        
+        .main {
+            width: 100%;
+            min-height: 100vh;
+            padding-top: 100px;
         }
-        .header{
-            display:flex;
-            align-items:center;
+        
+        .logo {
+            width: 100px;
+            height: 55px;
+        }
+        
+        #logo {
+            width: 100%;
+            height: 100%;
+            filter: invert(74%) sepia(72%) saturate(6275%) hue-rotate(96deg) brightness(117%) contrast(137%);
+            object-fit: contain;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 10px 20px;
-             background: #000000;
-             position: fixed;
-             width:100%;
-             height:100px;
+            background: #BA9B9B;
+            position: fixed;
+            width: 100%;
+            height: 100px;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
-        .nav{
-            width:100%;    
+        
+        .nav {
+            display: flex;
         }
-        .nav ul{
-            display:flex;
-            justify-content: space-evenly;
-            align-items:center;
-            padding: 10px 20px;
+        
+        .nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
-        .nav ul li{
-            list-style-type: none;
+        
+        .nav ul li {
+            margin: 0 15px;
+            position: relative;
         }
-        a{
+        
+        .nav ul li a {
             text-decoration: none;
             color: #ddd;
+            font-size: 18px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
         }
-        .section{
-            width:100%;
+        
+        .nav ul li a:hover {
+            color: #70e70e;
+            background: rgba(112, 231, 14, 0.1);
+            transform: scale(1.05);
+            text-shadow: 0 0 10px #70e70e;
+        }
+        
+        /* Hamburger for mobile */
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #ddd;
+            transition: color 0.3s;
+            aria-label: "Open navigation menu";
+            margin-right: 15px;
+        }
+        
+        .hamburger:hover {
+            color: #70e70e;
+        }
+        
+        /* Mobile nav overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 100px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: calc(100vh - 100px);
+            background: rgba(0,0,0,0.9);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: slideIn 0.3s ease;
+            aria-hidden: "true";
+        }
+        
+        .nav-overlay ul {
+            list-style: none;
+            text-align: center;
+        }
+        
+        .nav-overlay ul li {
+            margin: 20px 0;
+        }
+        
+        .nav-overlay ul li a {
+            font-size: 24px;
+            color: #ddd;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-overlay ul li a:hover {
+            color: #70e70e;
+            background: rgba(112, 231, 14, 0.1);
+            transform: scale(1.1);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section {
+            width: 100%;
             height: auto;
             display: flex;
+            flex-wrap: wrap;
+            text-align: center;
             justify-content: space-around;
             align-items: center;
-            background: linear-gradient(0deg,#000000,#360168);
-            padding: 10px 0px;
+            background: linear-gradient(0deg, #000000, #360168);
+            padding: 20px 0px;
         }
-        .section #left img{
-            margin-top: 100px;
+        
+        .section #left img {
             width: 200px;
             height: 200px;
             object-fit: cover;
             object-position: top center;
             border-radius: 50%;
-            box-shadow: 0px 4px 4px 0px #e70e94,-4px 0px 4px 0px #70e70e,0px -4px 4px 0px #70e70e,4px 0px 4px 0px #e70e94;
-            
+            box-shadow: 0px 4px 4px 0px #70e70e, -4px 0px 4px 0px #70e70e, 0px -4px 4px 0px #70e70e, 4px 0px 4px 0px #70e70e;
+            max-width: 100%;
         }
+        
         .section #right {
-            margin-top: 100px;
-            text-align: justify;
-            height:100%;
-            display: inline-block;
-            
+            text-align: left;
+            height: 100%;
+            max-width: 500px;
         }
-        #right h1{
+        
+        #right h1 {
             font-size: 55px;
             color: #70e70e;
             letter-spacing: 3px;
         }
-        #right h3{
+        
+        #right h3 {
             width: 100%;
             font-size: 45px;
-            color:#aa4fff;
+            color: #aa4fff;
             position: relative;
-            letter-spacing: 3px;            
+            letter-spacing: 3px;
             white-space: nowrap;
             overflow: hidden;
-            animation: 
-                typing 7s steps(18) infinite alternate
-                
+            animation: typing 8s steps(14) infinite alternate;
         }
         
-         @keyframes typing{
-            0%{
-                width:0
+        @keyframes typing {
+            0% {
+                width: 0;
             }
-            50%{
-                width: 18ch;
+            50% {
+                width: 13.5ch;
             }
-            100%{
+            100% {
                 width: 0;
             }
         }
-        #right p{
+        
+        #right p {
             font-family: Georgia, 'Times New Roman', Times, serif;
             font-size: 25px;
             letter-spacing: 3px;
         }
-        #right b{
+        
+        #right b {
             background: #000;
-            color:#360168;
+            color: #24C2FF;
+            transition: all 0.5s ease;
+        }
+        
+        /* New sections */
+        .about, .projects, .contact {
+            width: 100%;
+            padding: 50px 20px;
+            background: #111;
+            text-align: center;
+        }
+        
+        .about h2, .projects h2, .contact h2 {
+            font-size: 40px;
+            color: #70e70e;
+            margin-bottom: 20px;
+        }
+        
+        .about p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .projects .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+            cursor: pointer;
+            min-height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: overlay;
+            background-color: rgba(34, 34, 34, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+        }
+        
+        .project-card:hover, .project-card:focus {
+            transform: translateY(-10px)scale(1.04);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+            border: 2px solid #70e70e;
+        }
+        
+        .project-card h3 {
+            color: #aa4fff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px rgba(0,0,0,0.7);
+            transition: text-decoration 0.3s;
+        }
+        
+        .project-card:hover h3, .project-card:focus h3 {
+            text-decoration: underline;
+        }
+        
+        .project-card p {
+            font-size: 16px;
+            color: #ddd;
+            text-shadow: 0 0 5px rgba(0,0,0,0.7);
+            line-height: 1.5;
+        }
+        
+        .view-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #70e70e;
+            color: #000;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, color 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .view-link a{
+            text-decoration: none;
+        }
+        .view-link:hover, .view-link:focus {
+            background: #5cb85c;
+            transform: scale(1.05);
+            color: #fff;
+        }
+        
+        /* Contact form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #222;
+            color: #ddd;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #70e70e;
+            outline: none;
+        }
+        
+        .contact-form button {
+            padding: 15px;
+            background: #70e70e;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .contact-form button:hover {
+            background: #5cb85c;
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            background: #000;
+            padding: 20px;
+            text-align: center;
+            color: #ddd;
+        }
+        
+        .footer ul {
+            list-style: none;
+        }
+        
+        .footer li {
+            margin: 10px 0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav ul {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+            .section {
+                flex-direction: column;
+                text-align: center;
+            }
+            #right {
+                text-align: center;
+            }
+            #right h1 {
+                font-size: 40px;
+            }
+            #right h3 {
+                font-size: 35px;
+            }
+            #right p {
+                font-size: 20px;
+            }
+            .header {
+                height: 80px;
+                padding: 10px;
+            }
+            .logo {
+                width: 80px;
+                height: 44px;
+            }
+            .main {
+                padding-top: 80px;
+            }
+            .about h2, .projects h2, .contact h2 {
+                font-size: 30px;
+            }
+            .about p {
+                font-size: 18px;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-form {
+                padding: 0 10px;
+            }
+        }
+        
+        /* Accessibility: Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="main">
         <div class="header">
             <div class="logo">
-                <img src="" alt="logo">
+                <img src="/file_000000008410622f83b01cb98e334939-removebg-preview.png" alt="Aftab Alam Logo" id="logo">
             </div>
-            <div class="nav">
-                <ul>
+            <nav class="nav">
+                <ul id="desktop-nav">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-            </div>
+                <div class="hamburger" id="hamburger">&#9776;</div>
+            </nav>
         </div>
-        <div class="section">
+        <!-- Mobile nav overlay -->
+        <div class="nav-overlay" id="nav-overlay">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="section" id="home">
             <div id="left">
-                <img src="https://static.vecteezy.com/system/resources/thumbnails/049/497/386/small/slender-androgynous-male-model-in-high-fashion-attire-minimalist-runway-clean-lines-sharp-cheekbones-neutral-colors-striking-an-avant-garde-pose-elegant-and-sleek-photo.jpg" alt="image">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/049/497/386/small/slender-androgynous-male-model-in-high-fashion-attire-minimalist-runway-clean-lines-sharp-cheekbones-neutral-colors-striking-an-avant-garde-pose-elegant-and-sleek-photo.jpg" alt="Profile image of Aftab Alam"loading="lazy">
             </div>
             <div id="right">
-                <h1>Hii!</h1> 
+                <h1>Hii!</h1>
                 <h3>I'm Aftab Alam</h3>
-                <p>A web <b>Developer</b> of javascript and react js.</p>
+                <p>A web <b id="dynamic-title">Developer</b> of JavaScript and React.js.</p>
             </div>
+        </div>
+        <div class="about" id="about">
+            <h2>About Me</h2>
+            <p>I'm Aftab Alam, a passionate web developer with expertise in JavaScript and React.js. I love creating interactive, user-friendly websites and applications. With a background in full-stack development, I focus on clean code, modern design, and seamless user experiences. When I'm not coding, you can find me exploring new tech trends or contributing to open-source projects.</p>
+        </div>
+        <div class="projects" id="projects">
+            <h2>My Projects</h2>
+            <div class="project-grid">
+                <div class="project-card" aria-label="View E-Commerce Site Project" tabindex="0" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');">
+                    <h3>Project 1: Birthday Wishes Site</h3>
+                    <p>A responsive website for sending personalized birthday wishes Built using HTML, CSS, and JavaScript.<br><span class="view-link"><a href="https://aftab82389.github.io/Birthday/">View Project →</a></span></p>
+                </div>
+                <div class="project-card" aria-label="View Portfolio Website Project" tabindex="0" style="background-image: url('/Screenshot_2025-10-31-06-47-30-98.jpg');">
+                    <h3>Project 2: Portfolio Website</h3>
+                    <p>This responsive portfolio site built with HTML, CSS, and JS showcases front-end skills.<br><span class="view-link"><a href="https://aftab82389.github.io/Birthday/">View Project →</a></span></p>
+                </div>
+                <div class="project-card" aria-label="View Task Manager App Project" tabindex="0" style="background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');">
+                    <h3>Project 3: New Year Wishes Site</h3>
+                    <p>A festive website for sending New Year wishes with creative design. Built using HTML, CSS, and JavaScript.<br><span class="view-link"><a href="https://aftab82389.github.io/NewYear/">View Project →</a></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="contact" id="contact">
+            <h2>Contact Me</h2>
+            <form class="contact-form" action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </div>
         <div class="footer">
-            <div id="contact">
-                <ul>
-                    <li>91+ 6207782389</li>
-                    <li>webdeveloper@gmail.com</li>    
-                </ul>
-            </div>
+            <ul>
+                <li>&copy; 2025 Aftab Alam. All rights reserved.</li>
+                <li><a href="https://github.com/yourusername" target="_blank">GitHub</a> | <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></li>
+            </ul>
         </div>
     </div>
+
+    <script>
+        // Smooth scrolling for navigation links with header offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const offsetTop = target.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+                // Close mobile menu after clicking
+                const overlay = document.getElementById('nav-overlay');
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            });
+        });
+
+// Toggle mobile nav overlay
+const hamburger = document.getElementById('hamburger');
+const overlay = document.getElementById('nav-overlay');
+hamburger.addEventListener('click', () => {
+    if (overlay.style.display === 'flex') {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    } else {
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+});
+
+// Close overlay if clicked outside
+document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !overlay.contains(e.target)) {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+});
+
+// Dynamic title cycling with fade-up effect
+const titles = ['Developer', 'Designer'];
+let titleIndex = 0;
+const dynamicTitle = document.getElementById('dynamic-title');
+setInterval(() => {
+    dynamicTitle.style.opacity = 0;
+    dynamicTitle.style.transform = 'translateY(10px)'; // Slide down on fade out
+    setTimeout(() => {
+        titleIndex = (titleIndex + 1) % titles.length;
+        dynamicTitle.textContent = titles[titleIndex];
+        dynamicTitle.style.opacity = 1;
+        dynamicTitle.style.transform = 'translateY(0)'; // Slide up on fade in
+    }, 500); // Half second transition
+}, 2000); // Change every 2 seconds
+
+// Simple fade-in animation on scroll for sections
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+});
+
+document.querySelectorAll('.about, .projects, .contact').forEach(section => {
+    section.style.opacity = 0;
+    section.style.transform = 'translateY(20px)';
+    section.style.transition = 'opacity 0.6s, transform 0.6s';
+    observer.observe(section);
+});
+
+// Basic form submission (for demo; replace with actual backend)
+document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for your message! I will get back to you soon.');
+    this.reset();
+});
+</script>
 </body>
 </html>
